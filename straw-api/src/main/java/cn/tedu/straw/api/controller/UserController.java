@@ -30,15 +30,15 @@ public class UserController {
         R r = new R();
         try {
             userService.regStudent(studentRegisterDTO);
-            return r.setMessage("注册成功!");
+            return R.ok().setMessage("注册成功!");
         } catch (InviteCodeException e) {
-            return r.setMessage("注册失败!邀请码错误!");
+            return R.failure(2).setMessage("注册失败!邀请码错误!");
         } catch (PhoneDuplicateException e) {
-            return r.setMessage("注册失败!手机号码已经被占用!");
+            return R.failure(3).setMessage("注册失败!手机号码已经被占用!");
         } catch (InsertException e) {
-            return r.setMessage("注册失败!服务器忙!请稍后再次尝试!");
+            return R.failure(4).setMessage("注册失败!服务器忙!请稍后再次尝试!");
         } catch (Throwable e) {
-            return r.setMessage("注册失败!出现预期以外的异常!" + e.getClass().getName() + "," + e.getMessage());
+            return R.failure(5).setMessage("注册失败!出现预期以外的异常!" + e.getClass().getName() + "," + e.getMessage());
         }
     }
 }
