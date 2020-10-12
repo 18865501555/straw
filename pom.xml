@@ -32,6 +32,7 @@
         <module>straw-api</module>
         <module>straw-generator</module>
         <module>straw-commons</module>
+        <module>straw-gateway</module>
     </modules>
 
     <dependencyManagement>

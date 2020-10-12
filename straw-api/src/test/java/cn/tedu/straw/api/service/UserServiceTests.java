@@ -22,7 +22,7 @@ public class UserServiceTests {
     void regStudent() {
         try {
             StudentRegisterDTO studentRegisterDTO = new StudentRegisterDTO()
-                    .setPhone("13600136001")
+                    .setPhone("13900139001")
                     .setPassword("1234")
                     .setDayOfBirth(LocalDate.now())
                     .setGender(1)

@@ -9,6 +9,7 @@ import cn.tedu.straw.api.ex.PhoneDuplicateException;
 import cn.tedu.straw.api.mapper.ClassInfoMapper;
 import cn.tedu.straw.api.mapper.UserMapper;
 import cn.tedu.straw.api.service.IUserService;
+import cn.tedu.straw.api.util.PasswordUtils;
 import cn.tedu.straw.commons.model.ClassInfo;
 import cn.tedu.straw.commons.model.User;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -70,14 +71,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             throw new PhoneDuplicateException("注册失败!手机号码已经被占用!");
         }
         // 手机号码未被注册，准备插入数据
+
+        String rawPassword = studentRegisterDTO.getPassword();
+        String encodePassword = PasswordUtils.encode(rawPassword);
+
         // 创建User对象，名为user
         User user = new User()
                 // 补全user对象中的属性值：username > 参数studentRegisterDTO.getPhone()
                 .setUsername(studentRegisterDTO.getPhone())
                 // 补全user对象中的属性值：nickname > 参数studentRegisterDTO.getNickname()
                 .setNickname(studentRegisterDTO.getNickname())
-                // TODO 补全user对象中的属性值：password > 参数，需要加密
-                .setPassword(studentRegisterDTO.getPassword())
+                // 补全user对象中的属性值：password > 参数，需要加密
+                .setPassword(encodePassword)
                 // 补全user对象中的属性值：gender > 参数studentRegisterDTO.getGender()
                 .setGender(studentRegisterDTO.getGender())
                 // 补全user对象中的属性值：dayOfBirth > 参数studentRegisterDTO.getDayOfBirth()
