@@ -18,6 +18,8 @@ public class GlobalExceptionHandler {
             return R.failure(R.State.ERR_INSERT_FAIL, e);
         } else if (e instanceof ParameterValidationException) {
             return R.failure(R.State.ERR_PARAMETER_VALIDATION, e);
+        } else if (e instanceof ClassDisabledException) {
+            return R.failure(R.State.ERR_CLASS_DISABLED, e);
         } else {
             return R.failure(R.State.ERR_UNKNOWN,e);
         }

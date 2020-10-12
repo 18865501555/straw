@@ -2,6 +2,7 @@ package cn.tedu.straw.api.service.impl;
 
 
 import cn.tedu.straw.api.dto.StudentRegisterDTO;
+import cn.tedu.straw.api.ex.ClassDisabledException;
 import cn.tedu.straw.api.ex.InsertException;
 import cn.tedu.straw.api.ex.InviteCodeException;
 import cn.tedu.straw.api.ex.PhoneDuplicateException;
@@ -52,6 +53,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             // 是：邀请码不存在，不允许注册
             // -- 抛出“邀请码错误(InviteCodeException)”的异常
             throw new InviteCodeException("注册失败!邀请码错误!");
+        }
+        // 判断班级状态enabled是否为0(禁用)
+        if (classInfo.getEnabled() == 0) {
+            throw new ClassDisabledException("注册失败!尝试注册的班级已经被禁用!请联系管理员获取有效的邀请码!");
         }
         // 基于参数phone调用持久层的selectOne()方法，根据手机号码查询用户信息，得到User类型的对象result
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();

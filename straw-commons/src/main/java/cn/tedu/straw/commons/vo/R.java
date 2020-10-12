@@ -67,6 +67,10 @@ public class R<T> {
          */
         int ERR_PARAMETER_VALIDATION = 4003;
         /**
+         * 班级被禁用
+         */
+        int ERR_CLASS_DISABLED = 4004;
+        /**
          * 未知错误
          */
         int ERR_UNKNOWN = 9000;
