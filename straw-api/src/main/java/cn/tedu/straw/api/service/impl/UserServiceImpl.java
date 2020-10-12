@@ -51,7 +51,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (classInfo == null) {
             // 是：邀请码不存在，不允许注册
             // -- 抛出“邀请码错误(InviteCodeException)”的异常
-            throw new InviteCodeException();
+            throw new InviteCodeException("注册失败!邀请码错误!");
         }
         // 基于参数phone调用持久层的selectOne()方法，根据手机号码查询用户信息，得到User类型的对象result
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
@@ -62,7 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (result != null) {
             // 是：手机号码已经被注册，则不允许插入数据
             // -- 抛出“手机号码已经被占用(PhoneDuplicateException)”的异常
-            throw new PhoneDuplicateException();
+            throw new PhoneDuplicateException("注册失败!手机号码已经被占用!");
         }
         // 手机号码未被注册，准备插入数据
         // 创建User对象，名为user
@@ -98,7 +98,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         // 判断返回值是否不为1
         if (rows != 1) {
             // 是：抛出“插入用户数据失败(InsertException)”的异常
-            throw new InsertException();
+            throw new InsertException("注册失败!服务器忙，请稍后再次尝试!");
         }
     }
 }
