@@ -4,20 +4,27 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import javax.annotation.Resource;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Resource
+    private UserDetailsService userDetailsService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // 当前方法的主要作用是:授权
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("{noop}1234")
-                .authorities("admin_list", "admin_delete", "user")
-                .and()
-                .withUser("user")
-                .password("{noop}1234")
-                .authorities("user");
+        // 当前方法的主要作用是:登陆验证授权
+        auth.userDetailsService(userDetailsService);
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+//                .password("{bcrypt}$2a$10$hMbxlC8y.EEYCOWPBYjSa.uYGDiC.tncZf2DP39HqVj2BquAOSmxK")
+//                .authorities("admin_list", "admin_delete", "user")
+//                .and()
+//                .withUser("user")
+//                .password("{bcrypt}$2a$10$hMbxlC8y.EEYCOWPBYjSa.uYGDiC.tncZf2DP39HqVj2BquAOSmxK")
+//                .authorities("user");
     }
 
     @Override
