@@ -23,6 +23,7 @@
         <mybatis.plus.version>3.3.2</mybatis.plus.version>
         <lombok.version>1.18.12</lombok.version>
         <straw.commons.version>0.0.1-SNAPSHOT</straw.commons.version>
+        <commons.codec.version>1.14</commons.codec.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -35,7 +36,19 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- 验证框架 -->
+            <!-- 安全框架 用于密码加密、登陆验证、访问授权等 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <!-- 摘要算法工具包-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+            <!-- 请求参数验证框架 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-validation</artifactId>
