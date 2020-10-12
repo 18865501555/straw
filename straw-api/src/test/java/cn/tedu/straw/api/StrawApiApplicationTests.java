@@ -4,6 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -37,5 +38,14 @@ class StrawApiApplicationTests {
 
         encodePassword = DigestUtils.sha512Hex(password);
         System.err.println("[sha-512] encode password=" + encodePassword);
+    }
+    @Test
+    void bcryptTests(){
+        String password = "1234";
+        for (int i = 0; i < 10; i++) {
+            // 即使对于同一个原文可以运算出N个不同的密文
+            String encodePassword = new BCryptPasswordEncoder().encode(password);
+            System.err.println("[bcrypt] encode password=" + encodePassword);
+        }
     }
 }
