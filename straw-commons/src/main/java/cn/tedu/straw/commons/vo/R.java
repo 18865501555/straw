@@ -63,6 +63,10 @@ public class R<T> {
          */
         int ERR_INSERT_FAIL = 4002;
         /**
+         * 请求参数验证失败
+         */
+        int ERR_PARAMETER_VALIDATION = 4003;
+        /**
          * 未知错误
          */
         int ERR_UNKNOWN = 9000;
