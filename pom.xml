@@ -37,6 +37,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Thymeleaf -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
             <!-- 安全框架 用于密码加密、登陆验证、访问授权等 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
