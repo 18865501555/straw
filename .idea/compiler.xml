@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="straw-api" />
         <module name="straw-commons" />
+        <module name="straw-eureka-server" />
         <module name="straw-gateway" />
         <module name="straw-generator" />
       </profile>
@@ -17,6 +18,7 @@
       <module name="straw" target="1.8" />
       <module name="straw-api" target="1.8" />
       <module name="straw-commons" target="1.8" />
+      <module name="straw-eureka-server" target="1.8" />
       <module name="straw-gateway" target="1.8" />
       <module name="straw-generator" target="1.8" />
     </bytecodeTargetLevel>
@@ -26,6 +28,7 @@
       <module name="straw" options="-parameters" />
       <module name="straw-api" options="-parameters" />
       <module name="straw-commons" options="-parameters" />
+      <module name="straw-eureka-server" options="-parameters" />
       <module name="straw-gateway" options="-parameters" />
       <module name="straw-generator" options="-parameters" />
     </option>

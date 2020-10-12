@@ -24,6 +24,7 @@
         <lombok.version>1.18.12</lombok.version>
         <straw.commons.version>0.0.1-SNAPSHOT</straw.commons.version>
         <commons.codec.version>1.14</commons.codec.version>
+        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -33,10 +34,19 @@
         <module>straw-generator</module>
         <module>straw-commons</module>
         <module>straw-gateway</module>
+        <module>straw-eureka-server</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <!-- SpringCloud家族 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- Thymeleaf -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
