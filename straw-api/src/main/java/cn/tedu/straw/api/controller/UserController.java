@@ -23,13 +23,14 @@ import javax.validation.Valid;
  * @since 2020-10-10
  */
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/v1/users")
 @Slf4j
 public class UserController {
     @Autowired
     IUserService userService;
 
-    // http://localhost:8080/api/v1/users/student/register?phone=13100131001&password=1234&inviteCode=JSD2004-666666
+    // http://localhost:8080/v1/users/student/register?phone=13100131001&password=1234&inviteCode=JSD2004-666666
+    // http://localhost/api/v1/users/student/register?phone=13100131111&password=1234&inviteCode=JSD2004-666666
     @RequestMapping("/student/register")
     public R regStudent(@Valid StudentRegisterDTO studentRegisterDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

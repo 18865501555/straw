@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 当前方法的主要作用是:访问控制
-        http.authorizeRequests()
+//        http.authorizeRequests()
                 /**
                  * 使用antMatchers()配置需要管理权限的URL，可以使用通配符
                  *  ? >>> 任何1个字符
@@ -47,12 +47,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                  *
                  * 紧随其后，使用hasAuthority()配置权限标识
                  */
-                .antMatchers("/admin/list").hasAuthority("admin_list")
-                .antMatchers("/admin/delete").hasAuthority("admin_delete")
-                .antMatchers("/user/**").hasAuthority("user")
+//                .antMatchers("/admin/list").hasAuthority("admin_list")
+//                .antMatchers("/admin/delete").hasAuthority("admin_delete")
+//                .antMatchers("/user/**").hasAuthority("user")
                 // 对任何请求进行授权检查
-                .anyRequest().authenticated();
+//                .anyRequest().authenticated();
         // 验证授权时，是使用登陆表单进行授权的
-        http.formLogin();
+//        http.formLogin();
+
+        http.authorizeRequests().anyRequest().permitAll();
+        // 关闭跨域攻击
+        http.csrf().disable();
     }
 }
