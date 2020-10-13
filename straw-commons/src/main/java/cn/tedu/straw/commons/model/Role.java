@@ -24,6 +24,10 @@ public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final int ADMIN = 1;
+    public static final int STUDENT = 2;
+    public static final int TEACHER = 3;
+
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 

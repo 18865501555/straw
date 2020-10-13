@@ -8,10 +8,13 @@ import cn.tedu.straw.api.ex.InviteCodeException;
 import cn.tedu.straw.api.ex.PhoneDuplicateException;
 import cn.tedu.straw.api.mapper.ClassInfoMapper;
 import cn.tedu.straw.api.mapper.UserMapper;
+import cn.tedu.straw.api.mapper.UserRoleMapper;
 import cn.tedu.straw.api.service.IUserService;
 import cn.tedu.straw.api.util.PasswordUtils;
 import cn.tedu.straw.commons.model.ClassInfo;
+import cn.tedu.straw.commons.model.Role;
 import cn.tedu.straw.commons.model.User;
+import cn.tedu.straw.commons.model.UserRole;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +39,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper userMapper;
     @Autowired
     private ClassInfoMapper classInfoMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public void regStudent(StudentRegisterDTO studentRegisterDTO) {
@@ -108,6 +113,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         // 判断返回值是否不为1
         if (rows != 1) {
             // 是：抛出“插入用户数据失败(InsertException)”的异常
+            throw new InsertException("注册失败!服务器忙，请稍后再次尝试!");
+        }
+
+        // 向User_role表中插入数据，以分配用户角色
+        UserRole userRole = new UserRole()
+                .setUserId(user.getId())
+                .setRoleId(Role.STUDENT);
+        rows = userRoleMapper.insert(userRole);
+        if (rows != 1) {
             throw new InsertException("注册失败!服务器忙，请稍后再次尝试!");
         }
     }

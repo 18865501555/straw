@@ -43,8 +43,16 @@ public class UserMapperTests {
         User user = userMapper.selectById(id);
         log.debug("user >>> {}", user);
     }
+
     @Test
-    void selectByUsername(){
+    void findByUsername() {
+        String username = "13800138001";
+        User user = userMapper.findByUsername(username);
+        log.debug("findByUsername, username={}, result={}", username, user);
+    }
+
+    @Test
+    void selectByUsername() {
         // 根据用户名查询数据，指定用户名的值
         String username = "root";
         // 创建查询时的条件对象，相当配置SQL语句中的WHERE子句
@@ -55,6 +63,5 @@ public class UserMapperTests {
         User user = userMapper.selectOne(queryWrapper);
         // 测试输出
         log.debug("query result >>> {}", user);
-
     }
 }
