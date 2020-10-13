@@ -14,6 +14,10 @@
 	<name>straw-api</name>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 		<!-- 安全框架 用于密码加密、登陆验证、访问授权等 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
