@@ -11,6 +11,7 @@ import cn.tedu.straw.api.mapper.UserMapper;
 import cn.tedu.straw.api.mapper.UserRoleMapper;
 import cn.tedu.straw.api.service.IUserService;
 import cn.tedu.straw.api.util.PasswordUtils;
+import cn.tedu.straw.api.vo.UserLoginVO;
 import cn.tedu.straw.commons.model.ClassInfo;
 import cn.tedu.straw.commons.model.Role;
 import cn.tedu.straw.commons.model.User;
@@ -124,5 +125,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (rows != 1) {
             throw new InsertException("注册失败!服务器忙，请稍后再次尝试!");
         }
+    }
+
+    @Override
+    public UserLoginVO getUserLoginDetails(String username) {
+
+        return null;
     }
 }

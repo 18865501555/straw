@@ -1,0 +1,21 @@
+package cn.tedu.straw.api.vo;
+
+import cn.tedu.straw.commons.model.Permission;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
+
+@Data
+public class UserLoginVO implements Serializable {
+    private Integer id;
+    private String username;
+    private String nickname;
+    private String password;
+    private String phone;
+    private Integer type;
+    private Integer gender;
+    private Integer locked;
+    private Integer enabled;
+    private List<Permission> permissions;
+}
