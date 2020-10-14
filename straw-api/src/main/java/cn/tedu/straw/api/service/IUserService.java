@@ -22,11 +22,4 @@ public interface IUserService extends IService<User> {
      */
     void regStudent(StudentRegisterDTO studentRegisterDTO);
 
-    /**
-     * 获取当前尝试登陆的用户详情
-     *
-     * @param username 用户名
-     * @return 匹配的用户详情，如果没有匹配的数据，则返回null
-     */
-    UserLoginVO getUserLoginDetails(String username);
 }

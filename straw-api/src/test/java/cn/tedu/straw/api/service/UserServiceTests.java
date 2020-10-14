@@ -2,14 +2,11 @@ package cn.tedu.straw.api.service;
 
 import cn.tedu.straw.api.dto.StudentRegisterDTO;
 import cn.tedu.straw.api.ex.ServiceException;
-import cn.tedu.straw.api.vo.UserLoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.xml.ws.Service;
-import java.rmi.server.ServerCloneException;
 import java.time.LocalDate;
 
 @SpringBootTest
@@ -37,10 +34,4 @@ public class UserServiceTests {
         }
     }
 
-    @Test
-    void getUserLoginDetails() {
-        String username = "13800138021";
-        UserLoginVO userLoginVO = service.getUserLoginDetails(username);
-        log.debug("getUserLoginDetails >>> {}", userLoginVO);
-    }
 }

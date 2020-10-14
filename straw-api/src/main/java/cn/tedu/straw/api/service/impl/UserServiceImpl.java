@@ -7,13 +7,14 @@ import cn.tedu.straw.api.ex.InsertException;
 import cn.tedu.straw.api.ex.InviteCodeException;
 import cn.tedu.straw.api.ex.PhoneDuplicateException;
 import cn.tedu.straw.api.mapper.ClassInfoMapper;
-import cn.tedu.straw.api.mapper.PermissionMapper;
 import cn.tedu.straw.api.mapper.UserMapper;
 import cn.tedu.straw.api.mapper.UserRoleMapper;
 import cn.tedu.straw.api.service.IUserService;
 import cn.tedu.straw.api.util.PasswordUtils;
-import cn.tedu.straw.api.vo.UserLoginVO;
-import cn.tedu.straw.commons.model.*;
+import cn.tedu.straw.commons.model.ClassInfo;
+import cn.tedu.straw.commons.model.Role;
+import cn.tedu.straw.commons.model.User;
+import cn.tedu.straw.commons.model.UserRole;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * <p>
@@ -41,8 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private ClassInfoMapper classInfoMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
-    @Autowired
-    private PermissionMapper permissionMapper;
+
 
     @Override
     public void regStudent(StudentRegisterDTO studentRegisterDTO) {
@@ -128,30 +127,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
     }
 
-    @Override
-    public UserLoginVO getUserLoginDetails(String username) {
-        // 基于参数username调用userMapper.findByUsername()方法查询用户信息
-        User user = userMapper.findByUsername(username);
-        // 判断查询结果是否为null
-        if (user == null) {
-            // -- 返回null,表示"用户名不存在"
-            return null;
-        }
-        // 如果还可以执行到此处,表示"找到了与用户名匹配的数据,用户名是存在的"
-        // 基于参数username调用permissionMapper.findByUsername()方法查询该用户的权限列表
-        List<Permission> permissions = permissionMapper.findByUsername(username);
-        // 创建UserLoginVO对象，并封装各属性的值
-        UserLoginVO userLoginVO = new UserLoginVO()
-                .setId(user.getId())
-                .setUsername(user.getUsername())
-                .setPassword(user.getPassword())
-                .setNickname(user.getNickname())
-                .setPhone(user.getPhone())
-                .setType(user.getType())
-                .setLocked(user.getLocked())
-                .setEnabled(user.getEnabled())
-                .setPermissions(permissions);
-        // 返回UserLoginVO对象
-        return userLoginVO;
-    }
 }

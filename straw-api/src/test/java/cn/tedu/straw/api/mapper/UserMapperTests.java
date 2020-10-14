@@ -45,13 +45,6 @@ public class UserMapperTests {
     }
 
     @Test
-    void findByUsername() {
-        String username = "13800138001";
-        User user = userMapper.findByUsername(username);
-        log.debug("findByUsername, username={}, result={}", username, user);
-    }
-
-    @Test
     void selectByUsername() {
         // 根据用户名查询数据，指定用户名的值
         String username = "root";

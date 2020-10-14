@@ -8,14 +8,4 @@
         <result column="name" property="name" />
         <result column="description" property="description" />
     </resultMap>
-<select id="findByUsername" resultMap="BaseResultMap">
-    SELECT DISTINCT permission.*
-FROM permission
-         LEFT JOIN  role_permission ON permission.id = role_permission.permission_id
-         LEFT JOIN role ON role_permission.role_id = role.id
-         LEFT JOIN user_role ON role.id = user_role.role_id
-         LEFT JOIN user ON user_role.user_id = user.id
-WHERE username = #{username}
-ORDER BY name
-</select>
 </mapper>

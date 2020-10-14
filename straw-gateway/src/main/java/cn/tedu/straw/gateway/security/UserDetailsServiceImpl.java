@@ -1,12 +1,12 @@
-package cn.tedu.straw.api.security;
+package cn.tedu.straw.gateway.security;
 
-import cn.tedu.straw.api.service.IUserService;
-import cn.tedu.straw.api.vo.UserLoginVO;
+
 import cn.tedu.straw.commons.security.LoginUserInfo;
+import cn.tedu.straw.gateway.service.IUserService;
+import cn.tedu.straw.gateway.vo.UserLoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
