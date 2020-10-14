@@ -2,6 +2,7 @@ package cn.tedu.straw.api.service;
 
 import cn.tedu.straw.api.dto.StudentRegisterDTO;
 import cn.tedu.straw.api.ex.ServiceException;
+import cn.tedu.straw.api.vo.UserLoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,14 @@ public class UserServiceTests {
             service.regStudent(studentRegisterDTO);
             log.debug("注册成功!!!");
         } catch (ServiceException e) {
-            log.debug("注册失败!!! 异常 >>> {}",e.getClass().getName());
+            log.debug("注册失败!!! 异常 >>> {}", e.getClass().getName());
         }
+    }
+
+    @Test
+    void getUserLoginDetails() {
+        String username = "13800138021";
+        UserLoginVO userLoginVO = service.getUserLoginDetails(username);
+        log.debug("getUserLoginDetails >>> {}", userLoginVO);
     }
 }
