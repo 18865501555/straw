@@ -1,39 +1,51 @@
 package cn.tedu.straw.api.security;
 
+import cn.tedu.straw.api.service.IUserService;
+import cn.tedu.straw.api.vo.UserLoginVO;
+import cn.tedu.straw.commons.security.LoginUserInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
+
+    @Autowired
+    private IUserService iUserService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 假设仅root是正确的用户名
-        if ("root".equals(username)) {
-            //用户名是root，则返回该用户的信息，后续Spring Security将根据返回的信息完成登陆验证及授权
-            UserDetails userDetails = User.builder()
-                    // username:String >>> 用户名
-                    .username("root")
-                    // password:String >>> 密码
-                    .password("{bcrypt}$2a$10$hMbxlC8y.EEYCOWPBYjSa.uYGDiC.tncZf2DP39HqVj2BquAOSmxK")
-                    // authorities:String... >>> 权限列表
-                    .authorities("权限1","权限2","权限3")
-                    // accountLocked:boolean >>> 账号是否锁定
-                    .accountLocked(false)
-                    // disabled:boolean >>> 账号是否禁用
-                    .disabled(false)
-                    // accountExpired:boolean >>> 账号是否已过期
-                    .accountExpired(false)
-                    // credentialsExpired:boolean >>> 证书是否已过期
-                    .credentialsExpired(false)
-                    // roles:String... >>> 用户组名称
-                    .roles("普通用户")
-                    .build();
-            return userDetails;
+        // 调用业务层获取用户名匹配的用户信息
+        UserLoginVO userLoginVO = iUserService.getUserLoginDetails(username);
+        // 从查询得到的结果中取出用户的权限信息，并封装为以下构造方法所需要的参数类型
+        String[] authorityArray = new String[userLoginVO.getPermissions().size()];
+        for (int i = 0; i < authorityArray.length; i++) {
+            authorityArray[i] = userLoginVO.getPermissions().get(i).getName();
         }
-        // 用户名不是root，则返回null，表示"无此用户"
-        return null;
+        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(authorityArray);
+        // 将获取到的用户信息封装为UserDetails的类型，也就是LoginUserInfo类型的对象
+        LoginUserInfo loginUserInfo = new LoginUserInfo(
+                userLoginVO.getUsername(),
+                userLoginVO.getPassword(),
+                userLoginVO.getEnabled() == 1,
+                true,
+                true,
+                userLoginVO.getLocked() == 0,
+                authorities
+        );
+        loginUserInfo.setId(userLoginVO.getId())
+                .setNickname(userLoginVO.getNickname())
+                .setPhone(userLoginVO.getPhone())
+                .setType(userLoginVO.getType());
+        // 返回
+        return loginUserInfo;
     }
+
 }
