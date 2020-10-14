@@ -58,5 +58,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().permitAll();
         // 关闭跨域攻击
         http.csrf().disable();
+        http.formLogin();
     }
 }

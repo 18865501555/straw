@@ -24,6 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 调用业务层获取用户名匹配的用户信息
         UserLoginVO userLoginVO = iUserService.getUserLoginDetails(username);
+        // 判断收否查询到数据
+        if (userLoginVO == null) {
+            return null;
+        }
         // 从查询得到的结果中取出用户的权限信息，并封装为以下构造方法所需要的参数类型
         String[] authorityArray = new String[userLoginVO.getPermissions().size()];
         for (int i = 0; i < authorityArray.length; i++) {
