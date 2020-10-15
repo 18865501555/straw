@@ -36,10 +36,17 @@
         <module>straw-commons</module>
         <module>straw-gateway</module>
         <module>straw-eureka-server</module>
+        <module>straw-redis-tag</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
             <!-- Thymeleaf整合Spring Security -->
             <dependency>
                 <groupId>org.thymeleaf.extras</groupId>

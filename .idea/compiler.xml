@@ -11,6 +11,7 @@
         <module name="straw-commons" />
         <module name="straw-eureka-server" />
         <module name="straw-gateway" />
+        <module name="straw-redis-tag" />
         <module name="straw-generator" />
       </profile>
     </annotationProcessing>
@@ -21,6 +22,7 @@
       <module name="straw-eureka-server" target="1.8" />
       <module name="straw-gateway" target="1.8" />
       <module name="straw-generator" target="1.8" />
+      <module name="straw-redis-tag" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -31,6 +33,7 @@
       <module name="straw-eureka-server" options="-parameters" />
       <module name="straw-gateway" options="-parameters" />
       <module name="straw-generator" options="-parameters" />
+      <module name="straw-redis-tag" options="-parameters" />
     </option>
   </component>
 </project>

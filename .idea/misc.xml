@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/straw-commons/pom.xml" />
         <option value="$PROJECT_DIR$/straw-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/straw-eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/straw-redis-tag/pom.xml" />
       </list>
     </option>
   </component>
