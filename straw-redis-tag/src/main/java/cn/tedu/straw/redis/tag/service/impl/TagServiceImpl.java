@@ -2,10 +2,14 @@ package cn.tedu.straw.redis.tag.service.impl;
 
 
 import cn.tedu.straw.commons.model.Tag;
+import cn.tedu.straw.commons.vo.TagVO;
 import cn.tedu.straw.redis.tag.mapper.TagMapper;
 import cn.tedu.straw.redis.tag.service.ITagService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -18,4 +22,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagService {
 
+    @Autowired
+    private TagMapper tagMapper;
+    @Override
+    public List<TagVO> getTagList() {
+        return tagMapper.findAll();
+    }
 }
