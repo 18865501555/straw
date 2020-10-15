@@ -35,13 +35,12 @@ public class TagSchedule {
         redisUtils.delete(key);
         // 从数据库中查询Tag列表
         List<TagVO> tagVOS = iTagService.getTagList();
-        // 获取操作Redis中List类型数据的操作器
-//        ListOperations<String, Object> ops = redisTemplate.opsForList();
         // 遍历查询到的Tag列表
         for (TagVO tagVO : tagVOS) {
-            // 将标签数据保存到Redis中,一次只能放1个数据
-//            ops.rightPush(key, tagVO);
+            // 将Tag数据保存到Redis中的List,一次只能放1个数据
             redisUtils.rightPushListItem(key, tagVO);
+            // 将Tag数据独立的存储到Redis中，便于后续根据id获取数据
+            redisUtils.set("tag:"+tagVO.getId(),tagVO);
         }
     }
 }
