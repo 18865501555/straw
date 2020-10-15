@@ -29,17 +29,30 @@ public class R<T> {
 
     /**
      * 操作成功
-     * @return  状态码已经标记为"成功"的对象
+     *
+     * @return 状态码已经标记为"成功"的对象
      */
     public static R ok() {
         return new R().setState(State.SUCCESS);
     }
 
     /**
+     * 操作成功，且响应数据
+     *
+     * @param data 需要响应到客户端的数据
+     * @param <T>  响应到客户端的数据的类型
+     * @return 表示操作成功且封装了响应数据的对象
+     */
+    public static <T> R ok(T data) {
+        return R.ok().setData(data);
+    }
+
+    /**
      * 操作失败
-     * @param failureState  操作失败的状态码
-     * @param e 操作失败时抛出并被捕获的异常对象
-     * @return  已经封装了操作失败的状态码、错误描述信息的对象
+     *
+     * @param failureState 操作失败的状态码
+     * @param e            操作失败时抛出并被捕获的异常对象
+     * @return 已经封装了操作失败的状态码、错误描述信息的对象
      */
     public static R failure(Integer failureState, Throwable e) {
         return new R().setState(failureState).setMessage(e.getMessage());
@@ -48,7 +61,7 @@ public class R<T> {
     /**
      * 状态码
      */
-    public static interface State{
+    public static interface State {
         int SUCCESS = 2000;
         /**
          * 邀请码错误
