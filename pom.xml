@@ -25,6 +25,7 @@
         <straw.commons.version>0.0.1-SNAPSHOT</straw.commons.version>
         <commons.codec.version>1.14</commons.codec.version>
         <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
+        <thymeleaf.springsecurity.version>3.0.4.RELEASE</thymeleaf.springsecurity.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -39,6 +40,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Thymeleaf整合Spring Security -->
+            <dependency>
+                <groupId>org.thymeleaf.extras</groupId>
+                <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+                <version>${thymeleaf.springsecurity.version}</version>
+            </dependency>
             <!-- SpringCloud家族 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

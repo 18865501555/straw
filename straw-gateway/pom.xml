@@ -14,6 +14,11 @@
 	<name>straw-gateway</name>
 
 	<dependencies>
+		<!-- Thymeleaf整合Spring Security -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>cn.tedu</groupId>
 			<artifactId>straw-commons</artifactId>

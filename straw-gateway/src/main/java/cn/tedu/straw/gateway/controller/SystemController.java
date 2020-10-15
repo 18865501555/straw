@@ -22,4 +22,9 @@ public class SystemController {
     public String register() {
         return "register";
     }
+
+    @GetMapping("/login.html")
+    public String login() {
+        return "login";
+    }
 }
