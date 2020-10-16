@@ -1,9 +1,11 @@
 package cn.tedu.straw.redis.tag.controller;
 
 import cn.tedu.straw.commons.vo.R;
+import cn.tedu.straw.commons.vo.TagVO;
 import cn.tedu.straw.redis.tag.util.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +25,12 @@ public class TagController {
         List<Object> list = redisUtils.getList(key);
         // 响应结果
         return R.ok(list);
+    }
+
+    // http://localhost:8888/v1/tags/1
+    @GetMapping("/{id}")
+    public R<Object> getTag(@PathVariable("id") Integer id) {
+        Object obj = redisUtils.get("tag:" + id);
+        return R.ok(obj);
     }
 }
