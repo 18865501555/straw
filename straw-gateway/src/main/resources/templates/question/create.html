@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +30,7 @@
 <header class="container-fluid mb-3 bg-light">
   <nav class="navbar navbar-expand-lg   navbar-light bg-light">
     <a class="navbar-brand" href="../index.html">
-        <img alt="稻草问答" src="../img/straw_logo_239x80.png" height="33">
+      <img alt="稻草问答" src="../img/straw_logo_239x80.png" height="33">
     </a>
     <button class="navbar-toggler" type="button"
             data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -88,14 +88,14 @@
             <span aria-hidden="true">&times;</span>
           </button>
           <div id="myTab" role="tablist" class="nav nav-tabs">
-              <a href="#commentNotice" class="nav-item nav-link active text-black" data-toggle="tab"
-                 aria-controls="commentNotice" aria-selected="true">
-                通知
-              </a>
-              <a href="#announcement" class="nav-item nav-link text-black" data-toggle="tab" aria-controls="announcement"
-                 aria-selected="true">
-                公告
-              </a>
+            <a href="#commentNotice" class="nav-item nav-link active text-black" data-toggle="tab"
+               aria-controls="commentNotice" aria-selected="true">
+              通知
+            </a>
+            <a href="#announcement" class="nav-item nav-link text-black" data-toggle="tab" aria-controls="announcement"
+               aria-selected="true">
+              公告
+            </a>
           </div>
           <div id="myTabContent" class="tab-content col-12">
             <div class="tab-pane fade show active row" id="commentNotice" role="tabpanel"
@@ -181,19 +181,7 @@
   </div><!-- 查看邀请码modal-->
 </header>
 <!--引入标签的导航栏-->
-<div class="container-fluid" >
-  <div class="nav font-weight-light">
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>全部</small></a>
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>Java基础</small></a>
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>Java OOP</small></a>
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>Java SE</small></a>
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>WebServer</small></a>
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>二进制</small></a>
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>Web</small></a>
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>MySQL</small></a>
-    <a href="../tag/tag_question.html" class="nav-item nav-link text-info"><small>Servlet</small></a>
-  </div>
-</div>
+<div th:replace="index::nav_tags"></div>
 <div class="container-fluid mt-2 mb-1 bg-light" id="app" v-cloak>
   <div class="row">
     <div class="alsrtInfo" style="display: none" :style="{display: displayStsates}" ref="alertMsg">
@@ -202,28 +190,26 @@
   </div>
   <div class="row">
 
-    <div class="col-8">
+    <div class="col-8" id="createQuestionApp">
       <h4 class="border-bottom m-2 p-2 font-weight-light"><i class="fa fa-question-circle-o" aria-hidden="true"></i>
         填写问题</h4>
-      <form >
+      <form>
         <div class="form-group">
           <label for="title">标题:</label>
           <input type="text" class="form-control" id="title" name="title" placeholder="请填写标题3~50字符"
                  pattern="^.{3,50}$" required v-model="title">
         </div>
         <div class="form-group">
-          <label >请至少选择一个标签：</label>
-          <select multiple class="form-control" name="tags" >
-            <option>Java基础</option>
-            <option>Java OOP</option>
-            <option>Java SE</option>
-            <option>Spring</option>
-            <option>Spring MVC</option>
-          </select>
+          <label>请至少选择一个标签:</label>
+          <!-- :options >>> 绑定的Vue属性，即绑定的数据 -->
+          <v-select placeholder="请选择问题的标签"
+                    multiple
+                    :options="tags">
+          </v-select>
         </div>
         <div class="form-group">
-          <label >请选择老师：</label>
-          <select multiple class="form-control" name="teachers" >
+          <label>请选择老师：</label>
+          <select multiple class="form-control" name="teachers">
             <option>王克晶</option>
             <option>范传奇</option>
             <option>刘国斌</option>
@@ -245,7 +231,7 @@
       <!--热点数据-->
       <div class="container-fluid bg-light mt-5">
         <h4 class="m-2 p-2 font-weight-light"><i class="fa fa-list" aria-hidden="true"></i> 热点问题</h4>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -263,7 +249,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -281,7 +267,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -299,7 +285,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -317,7 +303,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -335,7 +321,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -353,7 +339,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -371,7 +357,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -389,7 +375,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -407,7 +393,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -425,7 +411,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -443,7 +429,7 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush" >
+        <div class="list-group list-group-flush">
           <a href="../question/detail.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1 text-dark">equals和==的区别是啥？</h6>
@@ -475,15 +461,17 @@
 <script src="../plugins/summernote/summernote.min.js"></script>
 <script src="../plugins/summernote/summernote-zh-CN.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $('#summernote').summernote({
-      height: 300,
-      tabsize: 2,
-      lang: 'zh-CN',
-      placeholder: '请输入问题的详细描述...'
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            height: 300,
+            tabsize: 2,
+            lang: 'zh-CN',
+            placeholder: '请输入问题的详细描述...'
+        });
+        $('select').select2({placeholder: '请选择...'});
     });
-    $('select').select2({placeholder:'请选择...'});
-  });
 </script>
+<script src="/js/commons/nav_tags.js?time=202010161041110"></script>
+<script src="/js/question/create.js?time=202010161041110"></script>
 </body>
 </html>

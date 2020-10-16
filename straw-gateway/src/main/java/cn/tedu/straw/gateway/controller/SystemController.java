@@ -27,4 +27,9 @@ public class SystemController {
     public String login() {
         return "login";
     }
+
+    @GetMapping("/question/create.html")
+    public String createQuestion() {
+        return "question/create";
+    }
 }

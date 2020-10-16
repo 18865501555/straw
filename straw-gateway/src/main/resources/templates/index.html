@@ -170,7 +170,7 @@
 </header>
 
 <!--引入标签的导航栏-->
-<div class="container-fluid" id="tagsApp">
+<div class="container-fluid" id="tagsApp" th:fragment="nav_tags">
   <div class="nav font-weight-light">
     <a href="tag/tag_question.html" class="nav-item nav-link text-info"><small>全部</small></a>
     <a v-for="tag in tags" href="tag/tag_question.html"
@@ -236,7 +236,7 @@
               </div>
             </div>
             <!-- / class="media-body"-->
-            <img src="img/tags/example0.jpg" class="ml-3 border img-fluid rounded" alt="" width="208" height="116">
+            <img src="img/tags/1.jpg" class="ml-3 border img-fluid rounded" alt="" width="208" height="116">
           </div>
           <div class="row mt-2">
             <div class="col-6 offset-3">
@@ -472,6 +472,6 @@
   <p class="text-center font-weight-light">达内教育-Java教研部 版权所有<br><a href="http://tedu.cn" rel="nofollow" target="_blank">京ICP备16053980号-3</a>
   </p>
 </footer>
-<script src="/js/commons/nav_tags.js"></script>
+<script src="/js/commons/nav_tags.js?time=202010161041110"></script>
 </body>
 </html>
