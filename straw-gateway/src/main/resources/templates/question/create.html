@@ -201,10 +201,18 @@
         </div>
         <div class="form-group">
           <label>请至少选择一个标签:</label>
+          <!-- placeholder >>> 当没有选择任何选项时的提示文字 -->
+          <!-- multiple >>> 可多选 -->
           <!-- :options >>> 绑定的Vue属性，即绑定的数据 -->
-          <v-select placeholder="请选择问题的标签"
+          <!-- v-model >>> 绑定选中某些选项后提交到服务器端的值 -->
+          <!-- :reduce >>> 使用:options的数据中的哪个属性作为提交的值 -->
+          <!-- :selectable >>> 最多选择几项 -->
+          <v-select placeholder="请选择问题的标签(最多选择3项)"
                     multiple
-                    :options="tags">
+                    :options="tags"
+                    v-model="selectedTagIds"
+                    :reduce="option => option.value"
+                    :selectable="() => selectedTagIds.length < 3">
           </v-select>
         </div>
         <div class="form-group">
